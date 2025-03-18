@@ -30,4 +30,28 @@
             @endif
         </div>
     </div>
+
+    <div class="container mx-auto p-6">
+        <h1 class="text-2xl font-bold">Dashboard</h1>
+
+        @if(Auth::user()->email === 'admin@unimar.edu' || Auth::user()->email === 'coordinador@unimar.edu')
+            <div class="mt-6 p-4 bg-green-100 border-l-4 border-green-500 text-green-700">
+                <p><strong>¡Bienvenido, Administrador!</strong> Tienes permisos de administrador.</p>
+            </div>
+
+            <!-- Panel de Administrador -->
+            <div class="mt-6 p-6 bg-white rounded-lg shadow">
+                <h2 class="text-xl font-semibold">Panel de Administración</h2>
+                <ul class="mt-4">
+                    <li><a href="{{ route('admin.users') }}" class="text-blue-600">Gestionar Usuarios</a></li>
+                    <li><a href="{{ route('admin.settings') }}" class="text-blue-600">Configuración del Sistema</a></li>
+                    <li><a href="{{ route('admin.reports') }}" class="text-blue-600">Ver Reportes</a></li>
+                </ul>
+            </div>
+        @else
+            <div class="mt-6 p-4 bg-blue-100 border-l-4 border-blue-500 text-blue-700">
+                <p>Bienvenido al sistema.</p>
+            </div>
+        @endif
+    </div>
 </x-app-layout>

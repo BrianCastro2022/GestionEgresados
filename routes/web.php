@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Livewire\Auth\ResetPassword; // Importación del componente Livewire
 use Livewire\Livewire;
+use App\Http\Controllers\AdminController;
 
 Route::view('/', 'welcome');
 
@@ -68,6 +69,13 @@ Route::middleware(['auth', 'role:Egresado'])->group(function () {
     Route::get('/egresado', function () {
         return view('egresado.dashboard');
     })->name('egresado.dashboard');
+});
+
+// Rutas del panel de administración
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+    Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
+    Route::get('/admin/reports', [AdminController::class, 'reports'])->name('admin.reports');
 });
 
 require __DIR__.'/auth.php';
